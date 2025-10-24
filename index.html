@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ο Αχιλλέας και τα Φάρσαλα - Για Παιδιά</title>
+    <title>Ο Αχιλλέας, η Ακρόπολη και τα Φάρσαλα - Για Παιδιά</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -175,9 +175,11 @@
         .navigation {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             padding: 15px;
             background: #f1f1f1;
             border-top: 3px solid #ddd;
+            position: relative;
         }
 
         .nav-btn {
@@ -191,6 +193,7 @@
             font-weight: bold;
             transition: all 0.3s;
             min-width: 120px;
+            z-index: 10;
         }
 
         .nav-btn:hover {
@@ -330,6 +333,47 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
 
+        /* Αρχιτεκτονική εικόνα */
+        .akropolis-image {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            border-radius: 15px;
+            border: 3px solid var(--primary);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Σελιδομετρητής */
+        .slide-counter {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            font-weight: bold;
+            color: var(--primary);
+            border: 2px solid var(--secondary);
+            z-index: 5;
+        }
+
+        .slide-counter span {
+            margin: 0 5px;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+        }
+
+        .current-slide {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .total-slides {
+            color: var(--accent);
+        }
+
         /* Landscape optimizations */
         @media (orientation: landscape) and (max-height: 600px) {
             .kid-container {
@@ -354,6 +398,10 @@
             .bubble, .fun-fact {
                 margin: 5px 0;
                 padding: 8px;
+            }
+
+            .slide-counter {
+                padding: 6px 12px;
             }
         }
 
@@ -394,6 +442,11 @@
                 height: 300px;
                 font-size: 120px;
             }
+
+            .slide-counter {
+                padding: 12px 25px;
+                font-size: 1.3rem;
+            }
         }
 
         /* Print Styles */
@@ -418,7 +471,7 @@
     <div class="kid-container">
         <!-- Header -->
         <div class="header">
-            <h1>🏛️ Ο Αχιλλέας και τα Φάρσαλα 🏛️</h1>
+            <h1>🏛️ Ο Αχιλλέας, η Ακρόπολη και τα Φάρσαλα 🏛️</h1>
             <p>Μια μαγική ιστορία για μικρούς ιστορικούς!</p>
         </div>
 
@@ -570,19 +623,180 @@
                 </div>
             </div>
 
-            <!-- Σελίδα 7: Τέλος -->
+            <!-- Σελίδα 7: Εισαγωγή στην Ακρόπολη -->
             <div class="kid-slide" id="kid-slide-7">
-                <div class="hero-image">🎊</div>
+                <div class="hero-image">🏰</div>
+                <div class="bubble">
+                    <h2>Η Ακρόπολη των Φαρσάλων 🏛️</h2>
+                    <p>Τώρα θα εξερευνήσουμε την Ακρόπολη των Φαρσάλων - ένα φανταστικό κάστρο πάνω σε λόφο!</p>
+                </div>
+                <img src="https://raw.githubusercontent.com/conchr/Acropolis-Presentation/main/akropoli-farsalwn.jpg" 
+                     alt="Ακρόπολη Φαρσάλων" class="akropolis-image">
+                <div class="fun-fact">
+                    <h3>📚 Το ξέρες ότι;</h3>
+                    <p>Η Ακρόπολη ήταν σαν ένα τεράστιο φρούριο που προστάτευε τους κατοίκους των Φαρσάλων!</p>
+                </div>
+            </div>
+
+            <!-- Σελίδα 8: Η θέση της Ακρόπολης -->
+            <div class="kid-slide" id="kid-slide-8">
+                <div class="hero-image">🗺️</div>
+                <div class="bubble">
+                    <h2>Πού βρίσκεται η Ακρόπολη; 🗺️</h2>
+                    <p>Βρίσκεται στον λόφο του Προφήτη Ηλία, το ψηλότερο σημείο των Φαρσάλων!</p>
+                </div>
+                <img src="https://raw.githubusercontent.com/conchr/Acropolis-Presentation/main/EFA_Larisas_AkrFarsalon_BA.jpg" 
+                     alt="Θέση Ακρόπολης" class="akropolis-image">
+                <div class="fun-fact">
+                    <h3>Γιατί εκεί;</h3>
+                    <p>Από εκεί μπορούσαν να βλέπουν όλη την πεδιάδα και να προειδοποιούνται για κάθε κίνδυνο!</p>
+                </div>
+            </div>
+
+            <!-- Σελίδα 9: Οι αρχαίοι κάτοικοι -->
+            <div class="kid-slide" id="kid-slide-9">
+                <div class="hero-image">👨‍👩‍👧‍👦</div>
+                <div class="bubble">
+                    <h2>Ποιοι ζούσαν στην Ακρόπολη; 👨‍👩‍👧‍👦</h2>
+                    <p>Από την εποχή των σπηλαίων μέχρι τα Βυζαντινά χρόνια, πολλοί άνθρωποι ζούσαν εκεί!</p>
+                </div>
+                <div class="fun-fact">
+                    <h3>📚 Το ξέρες ότι;</h3>
+                    <p>Η Ακρόπολη είχε τεράστια τείχη για να προστατεύει τους κατοίκους από τους εχθρούς!</p>
+                </div>
+            </div>
+
+            <!-- Σελίδα 10: Τα τείχη της Ακρόπολης -->
+            <div class="kid-slide" id="kid-slide-10">
+                <div class="hero-image">🧱</div>
+                <div class="bubble">
+                    <h2>Τα μαγικά τείχη! 🧱</h2>
+                    <p>Τα τείχη της Ακρόπολης ήταν τόσο δυνατά που αντέχουν ακόμα και σήμερα!</p>
+                </div>
+                <div class="fun-fact">
+                    <h3>Πώς τα έφτιαχναν;</h3>
+                    <p>Χρησιμοποιούσαν τεράστιους λίθους και τους τοποθετούσαν χωρίς τσιμέντο, σαν ένα γιγάντιο παζλ!</p>
+                </div>
+            </div>
+
+            <!-- Σελίδα 11: Οι πύλες της Ακρόπολης -->
+            <div class="kid-slide" id="kid-slide-11">
+                <div class="hero-image">🚪</div>
+                <div class="bubble">
+                    <h2>Οι κρυφές πύλες! 🚪</h2>
+                    <p>Η Ακρόπολη είχε δύο κύριες πύλες: μία για να μπαίνουν και μία για να βγαίνουν!</p>
+                </div>
+                <div class="fun-fact">
+                    <h3>📚 Το ξέρες ότι;</h3>
+                    <p>Οι πύλες ήταν τόσο στενές που μόνο ένας άντρας μπορούσε να περάσει κάθε φορά, ώστε να μην μπορούν πολλοί εχθροί να μπουν μαζί!</p>
+                </div>
+            </div>
+
+            <!-- Σελίδα 12: Οι πύργοι -->
+            <div class="kid-slide" id="kid-slide-12">
+                <div class="hero-image">🏰</div>
+                <div class="bubble">
+                    <h2>Οι ψηλοί πύργοι! 🏰</h2>
+                    <p>Στην Ακρόπολη υπήρχαν ψηλοί πύργοι από όπου οι φύλακες παρατηρούσαν όλη την περιοχή!</p>
+                </div>
+                <div class="fun-fact">
+                    <h3>Γιατί χρειάζονταν πύργους;</h3>
+                    <p>Από τους πύργους μπορούσαν να δουν τους εχθρούς από μακριά και να προετοιμαστούν!</p>
+                </div>
+            </div>
+
+            <!-- Σελίδα 13: Η δεξαμενή νερού -->
+            <div class="kid-slide" id="kid-slide-13">
+                <div class="hero-image">💧</div>
+                <div class="bubble">
+                    <h2>Η μαγική δεξαμενή! 💧</h2>
+                    <p>Μέσα στην Ακρόπολη υπήρχε μια μεγάλη δεξαμενή που συγκέντρωνε το νερό της βροχής!</p>
+                </div>
+                <div class="fun-fact">
+                    <h3>📚 Το ξέρες ότι;</h3>
+                    <p>Η δεξαμενή ήταν τόσο μεγάλη που μπορούσε να αποθηκεύσει νερό για όλους τους κατοίκους για πολλούς μήνες!</p>
+                </div>
+            </div>
+
+            <!-- Σελίδα 14: Η σημασία της Ακρόπολης -->
+            <div class="kid-slide" id="kid-slide-14">
+                <div class="hero-image">⭐</div>
+                <div class="bubble">
+                    <h2>Γιατί ήταν τόσο σημαντική; ⭐</h2>
+                    <p>Η Ακρόπολη ήταν το σημαντικότερο μέρος των Φαρσάλων για πολλούς αιώνες!</p>
+                </div>
+                <div class="fun-fact">
+                    <h3>📚 Το ξέρες ότι;</h3>
+                    <p>Στην Ακρόπολη έζησαν άνθρωποι για πάνω από 4000 χρόνια, από την εποχή των σπηλαίων μέχρι τα Βυζαντινά χρόνια!</p>
+                </div>
+            </div>
+
+            <!-- Σελίδα 15: Η Ακρόπολη σήμερα -->
+            <div class="kid-slide" id="kid-slide-15">
+                <div class="hero-image">🌳</div>
+                <div class="bubble">
+                    <h2>Η Ακρόπολη σήμερα 🌳</h2>
+                    <p>Σήμερα η Ακρόπολη είναι ένας μαγικός χώρος που μπορούμε να επισκεφθούμε!</p>
+                </div>
+                <div class="fun-fact">
+                    <h3>Τι μπορούμε να δούμε;</h3>
+                    <p>Μπορούμε να δούμε τα εντυπωσιακά τείχη, τις πύλες, τους πύργους και να φανταστούμε πώς ζούσαν οι αρχαίοι!</p>
+                </div>
+            </div>
+
+            <!-- Σελίδα 16: Quiz Ακρόπολης -->
+            <div class="kid-slide" id="kid-slide-16">
+                <div class="hero-image">❓</div>
+                <div class="bubble">
+                    <h2>Πόσα θυμάσαι για την Ακρόπολη; 🤔</h2>
+                    <p>Ας δούμε τι έμαθες για αυτό το μαγικό κάστρο!</p>
+                </div>
+                
+                <div id="akropolis-quiz-questions">
+                    <div class="quiz-question">
+                        <h3>Πού βρίσκεται η Ακρόπολη των Φαρσάλων;</h3>
+                        <div class="quiz-option" onclick="checkAkropolisAnswer(0, 0)">🏞️ Σε μια πεδιάδα</div>
+                        <div class="quiz-option" onclick="checkAkropolisAnswer(0, 1)">🏔️ Σε έναν ψηλό λόφο</div>
+                        <div class="quiz-option" onclick="checkAkropolisAnswer(0, 2)">🏖️ Δίπλα στη θάλασσα</div>
+                    </div>
+                    
+                    <div class="quiz-question" style="display: none;">
+                        <h3>Τι είχαν οι κάτοικοι για να πίνουν νερό;</h3>
+                        <div class="quiz-option" onclick="checkAkropolisAnswer(1, 0)">💧 Μια μεγάλη δεξαμενή</div>
+                        <div class="quiz-option" onclick="checkAkropolisAnswer(1, 1)">🥤 Καφετέρια</div>
+                        <div class="quiz-option" onclick="checkAkropolisAnswer(1, 2)">🚰 Βρύση στο σπίτι</div>
+                    </div>
+                    
+                    <div class="quiz-question" style="display: none;">
+                        <h3>Πόσες πύλες είχε η Ακρόπολη;</h3>
+                        <div class="quiz-option" onclick="checkAkropolisAnswer(2, 0)">🚪 Δύο κύριες πύλες</div>
+                        <div class="quiz-option" onclick="checkAkropolisAnswer(2, 1)">🚪 Δέκα πύλες</div>
+                        <div class="quiz-option" onclick="checkAkropolisAnswer(2, 2)">🚪 Καμία πύλη</div>
+                    </div>
+                </div>
+                
+                <div id="akropolis-quiz-result" style="display: none;">
+                    <div class="fun-fact">
+                        <h2>🎉 Συγχαρητήρια! 🎉</h2>
+                        <p>Είσαι πραγματικός ειδικός στην Ακρόπολη!</p>
+                        <p>Σκορ: <span id="akropolis-score">0</span>/3</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Σελίδα 17: Τέλος Ακρόπολη -->
+            <div class="kid-slide" id="kid-slide-17">
+                <div class="hero-image">🎉</div>
                 <div class="bubble">
                     <h2>Μπράβο! 🏆</h2>
-                    <p>Ολοκλήρωσες την περιπέτεια με τον Αχιλλέα!</p>
+                    <p>Ολοκλήρωσες και την περιπέτεια στην Ακρόπολη!</p>
                 </div>
                 <div class="fun-fact">
                     <h3>Τι έμαθες σήμερα;</h3>
                     <p>✅ Γνώρισες τον Αχιλλέα</p>
                     <p>✅ Έμαθες για τους Μυρμιδόνες</p>
-                    <p>✅ Είδες τα Φάρσαλα</p>
-                    <p>✅ Έγινες ιστορικός!</p>
+                    <p>✅ Εξερεύνησες την Ακρόπολη</p>
+                    <p>✅ Έγινες πραγματικός ιστορικός!</p>
                 </div>
                 <div style="text-align: center; margin-top: 20px;">
                     <button onclick="restartAdventure()" class="nav-btn">
@@ -597,6 +811,12 @@
             <button id="kid-prev" onclick="prevKidSlide()" disabled class="nav-btn">
                 ⬅️ Πίσω
             </button>
+            
+            <!-- Σελιδομετρητής στο κέντρο -->
+            <div class="slide-counter">
+                Σελίδα <span class="current-slide" id="current-slide">1</span> από <span class="total-slides" id="total-slides">17</span>
+            </div>
+            
             <button id="kid-next" onclick="nextKidSlide()" class="nav-btn">
                 Επόμενο ➡️
             </button>
@@ -611,6 +831,8 @@
         const progressBar = document.getElementById('kid-progress');
         let quizScore = 0;
         let currentQuestion = 0;
+        let akropolisQuizScore = 0;
+        let currentAkropolisQuestion = 0;
 
         function showKidSlide(index) {
             if (index < 0 || index >= totalKidSlides) return;
@@ -621,6 +843,7 @@
             
             updateKidProgress();
             updateKidButtons();
+            updateSlideCounter();
         }
 
         function updateKidProgress() {
@@ -640,6 +863,11 @@
             }
         }
 
+        function updateSlideCounter() {
+            document.getElementById('current-slide').textContent = currentKidSlide + 1;
+            document.getElementById('total-slides').textContent = totalKidSlides;
+        }
+
         function nextKidSlide() {
             if (currentKidSlide < totalKidSlides - 1) {
                 showKidSlide(currentKidSlide + 1);
@@ -652,7 +880,7 @@
             }
         }
 
-        // Quiz Logic
+        // Quiz Logic for Achilles
         function checkAnswer(questionIndex, answerIndex) {
             const questions = [
                 { correct: 1 }, // Αχιλλέας - ήρωας
@@ -687,13 +915,55 @@
             }, 2000);
         }
 
+        // Quiz Logic for Akropolis
+        function checkAkropolisAnswer(questionIndex, answerIndex) {
+            const questions = [
+                { correct: 1 }, // Θέση - λόφος
+                { correct: 0 }, // Δεξαμενή
+                { correct: 0 }  // Πύλες - δύο
+            ];
+
+            const options = document.querySelectorAll('#akropolis-quiz-questions .quiz-question')[questionIndex]
+                .querySelectorAll('.quiz-option');
+            
+            options.forEach(option => option.style.background = '#FFEB3B');
+            
+            if (answerIndex === questions[questionIndex].correct) {
+                options[answerIndex].style.background = '#4CAF50';
+                akropolisQuizScore++;
+            } else {
+                options[answerIndex].style.background = '#F44336';
+                options[questions[questionIndex].correct].style.background = '#4CAF50';
+            }
+
+            // Next question or show results
+            setTimeout(() => {
+                currentAkropolisQuestion++;
+                if (currentAkropolisQuestion < 3) {
+                    document.querySelectorAll('#akropolis-quiz-questions .quiz-question')[currentAkropolisQuestion-1].style.display = 'none';
+                    document.querySelectorAll('#akropolis-quiz-questions .quiz-question')[currentAkropolisQuestion].style.display = 'block';
+                } else {
+                    document.getElementById('akropolis-quiz-questions').style.display = 'none';
+                    document.getElementById('akropolis-quiz-result').style.display = 'block';
+                    document.getElementById('akropolis-score').textContent = akropolisQuizScore;
+                }
+            }, 2000);
+        }
+
         function restartAdventure() {
             showKidSlide(0);
             quizScore = 0;
             currentQuestion = 0;
+            akropolisQuizScore = 0;
+            currentAkropolisQuestion = 0;
             document.getElementById('quiz-questions').style.display = 'block';
             document.getElementById('quiz-result').style.display = 'none';
+            document.getElementById('akropolis-quiz-questions').style.display = 'block';
+            document.getElementById('akropolis-quiz-result').style.display = 'none';
             document.querySelectorAll('.quiz-question').forEach((q, i) => {
+                q.style.display = i === 0 ? 'block' : 'none';
+            });
+            document.querySelectorAll('#akropolis-quiz-questions .quiz-question').forEach((q, i) => {
                 q.style.display = i === 0 ? 'block' : 'none';
             });
         }
