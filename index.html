@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ο Αχιλλέας και τα Φάρσαλα - Για Παιδιά</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #2196F3;
+            --secondary: #FFC107;
+            --accent: #4CAF50;
+            --text: #333;
+            --background: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Comic Sans MS', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffeb3b 0%, #ff9800 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            color: var(--text);
+        }
+
+        .kid-container {
+            width: 100%;
+            height: 100%;
+            max-width: 1200px;
+            max-height: 90vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--primary), #3F51B5);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 5px solid var(--secondary);
+        }
+
+        .header h1 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: var(--background);
+        }
+
+        .kid-slide {
+            display: none;
+            animation: slideIn 0.5s ease;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .kid-slide.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Image */
+        .hero-image {
+            width: clamp(120px, 25vw, 200px);
+            height: clamp(120px, 25vw, 200px);
+            margin: 0 auto;
+            border-radius: 50%;
+            border: 5px solid var(--secondary);
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(50px, 10vw, 80px);
+            margin-bottom: 20px;
+            flex-shrink: 0;
+        }
+
+        /* Text Bubbles */
+        .bubble {
+            background: white;
+            padding: clamp(10px, 3vw, 15px);
+            border-radius: 20px;
+            margin: 10px 0;
+            border: 3px solid var(--primary);
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .bubble:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-right: 3px solid var(--primary);
+            border-bottom: 3px solid var(--primary);
+            transform: rotate(45deg);
+        }
+
+        .bubble h2 {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .bubble p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            line-height: 1.4;
+        }
+
+        /* Fun Facts */
+        .fun-fact {
+            background: #E8F5E9;
+            border: 3px dashed var(--accent);
+            padding: clamp(10px, 3vw, 15px);
+            border-radius: 15px;
+            margin: 15px 0;
+        }
+
+        .fun-fact h3 {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            margin-bottom: 8px;
+            color: var(--accent);
+        }
+
+        .fun-fact p {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            margin: 5px 0;
+        }
+
+        /* Quiz Styles */
+        .quiz-option {
+            background: #FFEB3B;
+            border: 3px solid #FF9800;
+            padding: clamp(10px, 3vw, 15px);
+            margin: 10px 0;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+        }
+
+        .quiz-option:hover {
+            background: #FFD54F;
+            transform: scale(1.05);
+        }
+
+        /* Navigation */
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f1f1f1;
+            border-top: 3px solid #ddd;
+            position: relative;
+        }
+
+        .nav-btn {
+            padding: clamp(10px, 3vw, 12px) clamp(15px, 4vw, 25px);
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            font-weight: bold;
+            transition: all 0.3s;
+            min-width: 120px;
+            z-index: 10;
+        }
+
+        .nav-btn:hover {
+            background: #1976D2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .nav-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Character - Κουκουβάγια στη μέση της πλοήγησης */
+        .character {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: clamp(60px, 10vw, 80px);
+            height: clamp(60px, 10vw, 80px);
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(25px, 5vw, 35px);
+            border: 3px solid #FF9800;
+            z-index: 5;
+        }
+
+        /* Progress Bar */
+        .progress-kids {
+            width: 100%;
+            height: 10px;
+            background: #ddd;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        .progress-bar-kids {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), #8BC34A);
+            border-radius: 5px;
+            transition: width 0.3s;
+        }
+
+        /* Image Gallery */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        @media (min-width: 768px) {
+            .image-gallery {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .gallery-img {
+            width: 100%;
+            border-radius: 10px;
+            border: 3px solid var(--primary);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        @media (min-width: 768px) {
+            .two-column {
+                flex-direction: row;
+            }
+            
+            .two-column > div {
+                flex: 1;
+            }
+        }
+
+        /* Three Column Layout */
+        .three-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        @media (min-width: 768px) {
+            .three-column {
+                flex-direction: row;
+            }
+            
+            .three-column > div {
+                flex: 1;
+            }
+        }
+
+        .character-image {
+            width: 100%;
+            border-radius: 15px;
+            border: 3px solid var(--primary);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Μικρότερες εικόνες για τη 5η σελίδα */
+        .small-images {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        @media (min-width: 768px) {
+            .small-images {
+                flex-direction: row;
+            }
+        }
+
+        .small-image {
+            width: 100%;
+            max-width: 250px;
+            margin: 0 auto;
+            border-radius: 15px;
+            border: 3px solid var(--primary);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Start Button */
+        .start-btn {
+            display: block;
+            margin: 30px auto;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, var(--primary), #3F51B5);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+
+        .start-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Landscape optimizations */
+        @media (orientation: landscape) and (max-height: 600px) {
+            .kid-container {
+                max-height: 95vh;
+            }
+            
+            .header {
+                padding: 10px;
+            }
+            
+            .content-area {
+                padding: 10px;
+            }
+            
+            .hero-image {
+                width: 80px;
+                height: 80px;
+                font-size: 40px;
+                margin-bottom: 10px;
+            }
+            
+            .bubble, .fun-fact {
+                margin: 5px 0;
+                padding: 8px;
+            }
+            
+            .character {
+                width: 50px;
+                height: 50px;
+                font-size: 25px;
+            }
+        }
+
+        /* High DPI Screens */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .bubble, .fun-fact, .quiz-option {
+                border-width: 2px;
+            }
+        }
+
+        /* 4K Screens */
+        @media (min-width: 2000px) {
+            .kid-container {
+                max-width: 1600px;
+                max-height: 80vh;
+            }
+            
+            .bubble, .fun-fact {
+                padding: 25px;
+                margin: 20px 0;
+            }
+            
+            .bubble h2 {
+                font-size: 2.5rem;
+            }
+            
+            .bubble p, .fun-fact p {
+                font-size: 1.8rem;
+            }
+            
+            .nav-btn {
+                font-size: 1.5rem;
+                padding: 20px 40px;
+            }
+            
+            .hero-image {
+                width: 300px;
+                height: 300px;
+                font-size: 120px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .kid-container {
+                box-shadow: none;
+                max-width: 100%;
+                max-height: none;
+            }
+            
+            .navigation, .character {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="kid-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🏛️ Ο Αχιλλέας και τα Φάρσαλα 🏛️</h1>
+            <p>Μια μαγική ιστορία για μικρούς ιστορικούς!</p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-kids">
+            <div class="progress-bar-kids" id="kid-progress"></div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Σελίδα 1: Αρχική σελίδα -->
+            <div class="kid-slide active" id="kid-slide-1">
+                <div class="hero-image">🏛️</div>
+                <div class="bubble">
+                    <h2>Τα Φάρσαλα και η Ιστορία τους</h2>
+                    <p>Καλώς ήρθες σε ένα μαγικό ταξίδι στο χρόνο! Θα εξερευνήσουμε μαζί την πλούσια ιστορία των Φαρσάλων και θα γνωρίσουμε τον θρυλικό ήρωα Αχιλλέα!</p>
+                </div>
+                <div class="fun-fact">
+                    <h3>📚 Το ξέρες ότι;</h3>
+                    <p>Τα Φάρσαλα είναι μια από τις πιο ιστορικές πόλεις της Ελλάδας με πάνω από 3,000 χρόνια ιστορίας!</p>
+                </div>
+                <button class="start-btn" onclick="nextKidSlide()">Ας ξεκινήσουμε το φανταστικό ταξίδι! 🚀</button>
+            </div>
+
+            <!-- Σελίδα 2: Εισαγωγή στον Αχιλλέα -->
+            <div class="kid-slide" id="kid-slide-2">
+                <div class="hero-image">⚔️</div>
+                <div class="bubble">
+                    <h2>Γεια σου, μικρέ εξερευνητή! 👋</h2>
+                    <p>Σε αυτή την περιπέτεια θα γνωρίσεις τον πιο δυνατό ήρωα της Ελλάδας - τον Αχιλλέα!</p>
+                </div>
+                <div class="fun-fact">
+                    <h3>📚 Το ξέρες ότι;</h3>
+                    <p>Ο Αχιλλέας ήταν τόσο δυνατός που τον φοβόντουσαν όλοι!</p>
+                </div>
+            </div>
+
+            <!-- Σελίδα 3: Ποιος ήταν ο Αχιλλέας -->
+            <div class="kid-slide" id="kid-slide-3">
+                <div class="hero-image">🛡️</div>
+                <div class="bubble">
+                    <h2>Ποιος ήταν ο Αχιλλέας; 🤔</h2>
+                    <p>Ο Αχιλλέας ήταν ένας σούπερ ήρωας της αρχαίας Ελλάδας!</p>
+                </div>
+                
+                <div class="three-column">
+                    <div>
+                        <img src="https://raw.githubusercontent.com/conchr/Achilles-for-Kids/main/AchillesCartoon.jpg" 
+                             alt="Αχιλλέας" class="character-image">
+                        <p style="text-align: center; margin-top: 8px; font-weight: bold;">Αχιλλέας</p>
+                    </div>
+                    <div>
+                        <img src="https://raw.githubusercontent.com/conchr/Achilles-for-Kids/main/thetiscartoon.jpg" 
+                             alt="Θέτιδα" class="character-image">
+                        <p style="text-align: center; margin-top: 8px; font-weight: bold;">Θέτιδα</p>
+                    </div>
+                    <div>
+                        <img src="https://raw.githubusercontent.com/conchr/Achilles-for-Kids/main/Chiron.jpg" 
+                             alt="Χείρων" class="character-image">
+                        <p style="text-align: center; margin-top: 8px; font-weight: bold;">Χείρων</p>
+                    </div>
+                </div>
+                
+                <div class="fun-fact">
+                    <p><strong>Η μαμά του:</strong> Η Θέτιδα, ήταν θεά της θάλασσας! 🌊</p>
+                    <p><strong>Ο δάσκαλός του:</strong> Ο Χείρων, ένας σοφός κένταυρος! 🐎</p>
+                    <p><strong>Η ιστορία του:</strong> Ο Αχιλλέας έγινε ο μεγαλύτερος ήρωας του Τρωικού Πολέμου!</p>
+                </div>
+            </div>
+
+            <!-- Σελίδα 4: Οι Μυρμιδόνες -->
+            <div class="kid-slide" id="kid-slide-4">
+                <div class="hero-image">🐜</div>
+                <div class="bubble">
+                    <h2>Οι Μυρμιδόνες - Ο Στρατός των Μυρμηγκιών! 🐜</h2>
+                    <p>Ο Αχιλλέας είχε έναν ολόκληρο στρατό από πολεμιστές που λεγόντουσαν Μυρμιδόνες!</p>
+                </div>
+                <img src="https://raw.githubusercontent.com/conchr/Achilles-Presentation/main/S-Myrmigi_farsala-(1).jpg" 
+                     alt="Μυρμήγκι" class="character-image" style="max-width: 300px; margin: 0 auto;">
+                <div class="fun-fact">
+                    <h3>Γιατί Μυρμιδόνες;</h3>
+                    <p>Η λέξη "Μυρμιδόνες" προέρχεται από τη λέξη "μύρμηξ" που σημαίνει μυρμήγκι! 🐜</p>
+                    <p>Ήταν τόσο πολλοί και οργανωμένοι σαν τα μυρμήγκια!</p>
+                </div>
+            </div>
+
+            <!-- Σελίδα 5: Τα Φάρσαλα σήμερα -->
+            <div class="kid-slide" id="kid-slide-5">
+                <div class="hero-image">🏺</div>
+                <div class="bubble">
+                    <h2>Τα Φάρσαλα Σήμερα 🗺️</h2>
+                    <p>Στα Φάρσαλα βρίσκεις πολλά μνημεία που θυμίζουν τον Αχιλλέα!</p>
+                </div>
+                
+                <div class="small-images">
+                    <div>
+                        <img src="https://raw.githubusercontent.com/conchr/Achilles-Presentation/main/Achilles.jpg" 
+                             alt="Αχιλλέας" class="small-image">
+                    </div>
+                    <div>
+                        <img src="https://raw.githubusercontent.com/conchr/Achilles-Presentation/main/%CE%98%CE%95%CE%A4%CE%99%CE%A3-508x381.png" 
+                             alt="Θέτιδα" class="small-image">
+                    </div>
+                </div>
+                
+                <div class="fun-fact">
+                    <p>📌 Υπάρχει άγαλμα του Αχιλλέα στην πλατεία</p>
+                    <p>📌 Υπάρχει και άγαλμα της μαμάς του, της Θέτιδας</p>
+                </div>
+            </div>
+
+            <!-- Σελίδα 6: Quiz -->
+            <div class="kid-slide" id="kid-slide-6">
+                <div class="hero-image">❓</div>
+                <div class="bubble">
+                    <h2>Πόσα θυμάσαι; 🤔</h2>
+                    <p>Ας δούμε τι έμαθες στην περιπέτειά μας!</p>
+                </div>
+                
+                <div id="quiz-questions">
+                    <div class="quiz-question">
+                        <h3>Ποιος ήταν ο Αχιλλέας;</h3>
+                        <div class="quiz-option" onclick="checkAnswer(0, 0)">👨‍🍳 Ένας μάγειρας</div>
+                        <div class="quiz-option" onclick="checkAnswer(0, 1)">⚔️ Ένας σούπερ ήρωας</div>
+                        <div class="quiz-option" onclick="checkAnswer(0, 2)">👨‍🌾 Ένας αγρότης</div>
+                    </div>
+                    
+                    <div class="quiz-question" style="display: none;">
+                        <h3>Πώς λεγόντουσαν οι πολεμιστές του Αχιλλέα;</h3>
+                        <div class="quiz-option" onclick="checkAnswer(1, 0)">🐜 Μυρμιδόνες</div>
+                        <div class="quiz-option" onclick="checkAnswer(1, 1)">🐝 Μελισσοκόμοι</div>
+                        <div class="quiz-option" onclick="checkAnswer(1, 2)">🐦 Σπουργίτες</div>
+                    </div>
+                    
+                    <div class="quiz-question" style="display: none;">
+                        <h3>Ποια ήταν η μαμά του Αχιλλέα;</h3>
+                        <div class="quiz-option" onclick="checkAnswer(2, 0)">🌊 Η Θέτιδα, θεά της θάλασσας</div>
+                        <div class="quiz-option" onclick="checkAnswer(2, 1)">🏔️ Η Ήρα, βασίλισσα των θεών</div>
+                        <div class="quiz-option" onclick="checkAnswer(2, 2)">🌾 Η Δήμητρα, θεά της σοδειάς</div>
+                    </div>
+                </div>
+                
+                <div id="quiz-result" style="display: none;">
+                    <div class="fun-fact">
+                        <h2>🎉 Συγχαρητήρια! 🎉</h2>
+                        <p>Είσαι πραγματικός ειδικός στον Αχιλλέα!</p>
+                        <p>Σκορ: <span id="score">0</span>/3</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Σελίδα 7: Τέλος -->
+            <div class="kid-slide" id="kid-slide-7">
+                <div class="hero-image">🎊</div>
+                <div class="bubble">
+                    <h2>Μπράβο! 🏆</h2>
+                    <p>Ολοκλήρωσες την περιπέτεια με τον Αχιλλέα!</p>
+                </div>
+                <div class="fun-fact">
+                    <h3>Τι έμαθες σήμερα;</h3>
+                    <p>✅ Γνώρισες τον Αχιλλέα</p>
+                    <p>✅ Έμαθες για τους Μυρμιδόνες</p>
+                    <p>✅ Είδες τα Φάρσαλα</p>
+                    <p>✅ Έγινες ιστορικός!</p>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button onclick="restartAdventure()" class="nav-btn">
+                        🔁 Ξανά Παίζω
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation">
+            <button id="kid-prev" onclick="prevKidSlide()" disabled class="nav-btn">
+                ⬅️ Πίσω
+            </button>
+            <div class="character">
+                🦉
+            </div>
+            <button id="kid-next" onclick="nextKidSlide()" class="nav-btn">
+                Επόμενο ➡️
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Kids Presentation Logic
+        let currentKidSlide = 0;
+        const kidSlides = document.querySelectorAll('.kid-slide');
+        const totalKidSlides = kidSlides.length;
+        const progressBar = document.getElementById('kid-progress');
+        let quizScore = 0;
+        let currentQuestion = 0;
+
+        function showKidSlide(index) {
+            if (index < 0 || index >= totalKidSlides) return;
+            
+            kidSlides.forEach(slide => slide.classList.remove('active'));
+            kidSlides[index].classList.add('active');
+            currentKidSlide = index;
+            
+            updateKidProgress();
+            updateKidButtons();
+        }
+
+        function updateKidProgress() {
+            const progress = ((currentKidSlide + 1) / totalKidSlides) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        function updateKidButtons() {
+            document.getElementById('kid-prev').disabled = currentKidSlide === 0;
+            document.getElementById('kid-next').disabled = currentKidSlide === totalKidSlides - 1;
+            
+            // Hide navigation on the first slide
+            if (currentKidSlide === 0) {
+                document.querySelector('.navigation').style.display = 'none';
+            } else {
+                document.querySelector('.navigation').style.display = 'flex';
+            }
+        }
+
+        function nextKidSlide() {
+            if (currentKidSlide < totalKidSlides - 1) {
+                showKidSlide(currentKidSlide + 1);
+            }
+        }
+
+        function prevKidSlide() {
+            if (currentKidSlide > 0) {
+                showKidSlide(currentKidSlide - 1);
+            }
+        }
+
+        // Quiz Logic
+        function checkAnswer(questionIndex, answerIndex) {
+            const questions = [
+                { correct: 1 }, // Αχιλλέας - ήρωας
+                { correct: 0 }, // Μυρμιδόνες
+                { correct: 0 }  // Μαμά του Αχιλλέα - Θέτιδα
+            ];
+
+            const options = document.querySelectorAll('.quiz-question')[questionIndex]
+                .querySelectorAll('.quiz-option');
+            
+            options.forEach(option => option.style.background = '#FFEB3B');
+            
+            if (answerIndex === questions[questionIndex].correct) {
+                options[answerIndex].style.background = '#4CAF50';
+                quizScore++;
+            } else {
+                options[answerIndex].style.background = '#F44336';
+                options[questions[questionIndex].correct].style.background = '#4CAF50';
+            }
+
+            // Next question or show results
+            setTimeout(() => {
+                currentQuestion++;
+                if (currentQuestion < 3) {
+                    document.querySelectorAll('.quiz-question')[currentQuestion-1].style.display = 'none';
+                    document.querySelectorAll('.quiz-question')[currentQuestion].style.display = 'block';
+                } else {
+                    document.getElementById('quiz-questions').style.display = 'none';
+                    document.getElementById('quiz-result').style.display = 'block';
+                    document.getElementById('score').textContent = quizScore;
+                }
+            }, 2000);
+        }
+
+        function restartAdventure() {
+            showKidSlide(0);
+            quizScore = 0;
+            currentQuestion = 0;
+            document.getElementById('quiz-questions').style.display = 'block';
+            document.getElementById('quiz-result').style.display = 'none';
+            document.querySelectorAll('.quiz-question').forEach((q, i) => {
+                q.style.display = i === 0 ? 'block' : 'none';
+            });
+        }
+
+        // Keyboard navigation for kids
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextKidSlide();
+            if (e.key === 'ArrowLeft') prevKidSlide();
+        });
+
+        // Touch gestures for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            if (touchEndX < touchStartX - swipeThreshold) {
+                nextKidSlide();
+            }
+            if (touchEndX > touchStartX + swipeThreshold) {
+                prevKidSlide();
+            }
+        }
+
+        // Initialize
+        showKidSlide(0);
+    </script>
+</body>
+</html>
