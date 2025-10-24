@@ -74,7 +74,6 @@
 
         .kid-slide {
             display: none;
-            animation: slideIn 0.5s ease;
             height: 100%;
             overflow-y: auto;
         }
@@ -82,11 +81,6 @@
         .kid-slide.active {
             display: flex;
             flex-direction: column;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Hero Image */
@@ -181,11 +175,9 @@
         .navigation {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             padding: 15px;
             background: #f1f1f1;
             border-top: 3px solid #ddd;
-            position: relative;
         }
 
         .nav-btn {
@@ -199,7 +191,6 @@
             font-weight: bold;
             transition: all 0.3s;
             min-width: 120px;
-            z-index: 10;
         }
 
         .nav-btn:hover {
@@ -213,23 +204,6 @@
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
-        }
-
-        /* Character - Κουκουβάγια στη μέση της πλοήγησης */
-        .character {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: clamp(60px, 10vw, 80px);
-            height: clamp(60px, 10vw, 80px);
-            background: var(--secondary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: clamp(25px, 5vw, 35px);
-            border: 3px solid #FF9800;
-            z-index: 5;
         }
 
         /* Progress Bar */
@@ -381,12 +355,6 @@
                 margin: 5px 0;
                 padding: 8px;
             }
-            
-            .character {
-                width: 50px;
-                height: 50px;
-                font-size: 25px;
-            }
         }
 
         /* High DPI Screens */
@@ -440,7 +408,7 @@
                 max-height: none;
             }
             
-            .navigation, .character {
+            .navigation {
                 display: none;
             }
         }
@@ -629,9 +597,6 @@
             <button id="kid-prev" onclick="prevKidSlide()" disabled class="nav-btn">
                 ⬅️ Πίσω
             </button>
-            <div class="character">
-                🦉
-            </div>
             <button id="kid-next" onclick="nextKidSlide()" class="nav-btn">
                 Επόμενο ➡️
             </button>
