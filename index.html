@@ -799,9 +799,15 @@
                     <p>✅ Έγινες πραγματικός ιστορικός!</p>
                 </div>
                 <div style="text-align: center; margin-top: 20px;">
-                    <button onclick="restartAdventure()" class="nav-btn">
-                        🔁 Ξανά Παίζω
-                    </button>
+                    <div style="display: flex; flex-direction: column; gap: 15px; align-items: center;">
+                        <button onclick="restartAdventure()" class="nav-btn">
+                            🔁 Ξανά Παίζω
+                        </button>
+                        <button onclick="openKastroKallitheas()" class="nav-btn" 
+                                style="background: linear-gradient(135deg, #8BC34A, #4CAF50);">
+                            🏰 Μάθε για το Κάστρο Καλλιθέας
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -948,6 +954,10 @@
                     document.getElementById('akropolis-score').textContent = akropolisQuizScore;
                 }
             }, 2000);
+        }
+
+        function openKastroKallitheas() {
+            window.location.href = 'https://conchr.github.io/Kastro-Kallitheas-for-Kids/';
         }
 
         function restartAdventure() {
